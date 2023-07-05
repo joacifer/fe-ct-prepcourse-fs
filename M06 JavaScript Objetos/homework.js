@@ -7,6 +7,14 @@ function crearGato(nombre, edad) {
    // La propiedad "meow" será una función que retorne el string: "Meow!".
    // Retornar el objeto.
    // Tu código:
+   var gato = {
+      nombre: nombre,
+      edad: edad,
+      meow: function(){
+         return "Meow!";
+      }
+   }
+return gato; 
 }
 
 function nuevoUsuario(nombre, email, password) {
@@ -14,6 +22,11 @@ function nuevoUsuario(nombre, email, password) {
    // Este debe tener las propiedades: "nombre", "email" y "password" con sus respectivos valores.
    // Retornar el objeto.
    // Tu código:
+   var persona = {
+      nombre: nombre,
+      email: email,
+      password: password,}
+   return persona;
 }
 
 function agregarPropiedad(objeto, propiedad) {
@@ -22,6 +35,9 @@ function agregarPropiedad(objeto, propiedad) {
    // Esta propiedad será igual al valor `null`.
    // Retornar el objeto.
    // Tu código:
+   var nuevo = objeto;
+   nuevo[propiedad]=null
+   return nuevo;
 }
 
 function invocarMetodo(objeto, metodo) {
@@ -29,36 +45,72 @@ function invocarMetodo(objeto, metodo) {
    // Esta propiedad contiene una función en su interior. Debes invocarla/ejecutarla.
    // [NOTA]: no necesitar retornar nada.
    // Tu código:
+   objeto[metodo]();
+   
 }
 
 function multiplicarNumeroDesconocidoPorCinco(objetoMisterioso) {
    // El parámetro "objetoMisterioso" posee una propiedad con el nombre "numeroMisterioso".
    // Debes multiplicar este número por 5 y retornar el resultado.
    // Tu código:
+   //resolucion1
+   return objetoMisterioso.numeroMisterioso *5;
+   //resolucion2
+   return objetoMisterioso['numeroMisterioso'] *5;
 }
+
 
 function eliminarPropiedad(objeto, propiedad) {
    // El parámetro "propiedad" es una propiedad del objeto que recibes.
    // Debes eliminarla del objeto y retornarlo finalmente.
    // Tu código:
+   delete objeto[propiedad];
+   return objeto;
 }
 
 function tieneEmail(objetoUsuario) {
    // Verifica si el "objetoUsuario", en su propiedad "email", posee un valor definido.
    // En ese caso retornar true. Caso contrario, false.
    // Tu código:
+   
+   // resolucion1
+   // if(objetoUsuario.email!==undefined || objetoUsuario.email !== null){
+   //     return true;
+   //    }  else false
+    
+   //resolucion 2
+   //return !!objetoUsuario.email;
+
+
+   //resolucion3
+      if(objetoUsuario.email){
+         return true;
+      } else return false;
 }
 
 function tienePropiedad(objeto, propiedad) {
    // Verifica si el objeto recibido posee una propiedad con el mismo nombre que el parámetro "propiedad".
    // En ese caso retornar true. Caso contrario, false.
    // Tu código:
+   //resolucion1
+   if(objeto.hasOwnProperty(propiedad)){
+      return true;
+   }  else return false;   
+   //resolucion2
+   //return objeto.hasOwnProperty(propiedad);
 }
 
 function verificarPassword(objetoUsuario, password) {
    // Verifica si la propiedad "password" del "objetoUsuario" coincide con el parámetro "password".
    // En ese caso retornar true. Caso contrario, false.
    // Tu código:
+
+   //resolucion1
+   if(objetoUsuario.password===password){
+      return true;
+   }else return false;
+   //resolucion2
+   // return objetoUsuario.passward===password
 }
 
 function actualizarPassword(objetoUsuario, nuevaPassword) {
@@ -66,6 +118,12 @@ function actualizarPassword(objetoUsuario, nuevaPassword) {
    // La nueva contraseña la recibes por parámetro.
    // Retornar el objeto.
    // Tu código:
+//resolucion1   
+   objetoUsuario.password = nuevaPassword
+   return objetoUsuario
+// resolucion2
+   // objetoUsuario["password"] = nuevaPassword
+   // return objetoUsuario
 }
 
 function agregarAmigo(objetoUsuario, nuevoAmigo) {
@@ -73,6 +131,8 @@ function agregarAmigo(objetoUsuario, nuevoAmigo) {
    // Debes agregar el "nuevoAmigo" al final de este arreglo.
    // Retornar el objeto.
    // Tu código:
+   objetoUsuario.amigos.push(nuevoAmigo)
+   return objetoUsuario
 }
 
 function pasarUsuarioAPremium(objetoMuchosUsuarios) {
@@ -81,7 +141,19 @@ function pasarUsuarioAPremium(objetoMuchosUsuarios) {
    // Define esta propiedad de todos los usuarios como true.
    // Retornar el arreglo.
    // Tu código:
+// resolucion 1
+//    objetoMuchosUsuarios.foreach(usuario => usuario.esPremium = true)
+// }
+//resolucion2
+   for( usuario of objetoMuchosUsuarios ){
+      usuario.esPremium = true
+   }
+   return objetoMuchosUsuarios
 }
+//resolucion3 siempre con el metodo map cuando se recorre con el metodo map siempre siempre vas a crear una variable
+// var usuarios = objetoMuchosUsuarios.map(usuario => usuario.esPremium = true )
+// return usuarios
+// }
 
 function sumarLikesDeUsuario(objetoUsuario) {
    // El parámetro "objetoUsuario" tiene una propiedad llamada "posts" que es un arreglo.
@@ -89,6 +161,22 @@ function sumarLikesDeUsuario(objetoUsuario) {
    // Cada post posee una propiedad llamada "likes". Esta propiedad es un número.
    // Debes sumar los likes de todos los post y retornar el resultado.
    // Tu código:
+// // forma mas corta
+//    objetoUsuario.posts.forEach(usuario => acumulador += usuario.likes)
+//    return acumulador
+
+//forma convencional
+      // var acumulador = 0
+      // for(var i =0; i < objetoUsuario.posts.legth ; i ++){
+      //    acumulador = acumulador + objetoUsuario.posts[i].likes
+      // }
+      // return acumulador
+   
+   var acumulador = 0                               
+   for (usuario of objetoUsuario.posts) {
+         acumulador += usuario.likes // = acumulador + usuario.likes
+   }
+   return acumulador
 }
 
 function agregarMetodoCalculoDescuento(objetoProducto) {
@@ -102,6 +190,19 @@ function agregarMetodoCalculoDescuento(objetoProducto) {
    // PorcentajeDeDescuento ---> 0.2
    // Precio final ---> 8
    // Tu código:
+  function metodo () {
+   var descuento = objetoProducto.precio * objetoProducto.porcentajeDeDescuento
+   var total = objetoProducto.precio - descuento
+   return total
+  }
+  objetoProducto["calcularPrecioDescuento"] = metodo
+  return objetoProducto
+// objetoProducto ["calcularPrecioDescuento"] =  () =>  {
+//    var descuento = objetoProducto.precio * objetoProducto.calcularPrecioDescuento
+//    var total = objetoProducto.precio  -  descuento
+//    return total
+// }
+//    return objetoProducto   
 }
 
 /*⚠️ NO MODIFIQUES NADA DEBAJO DE ESTO ⚠️*/
